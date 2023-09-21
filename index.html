@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://cdn.tailwindcss.com"></script>
+    <title>Log form</title>
+</head>
+<body>
+    <!-- Main Container-->
+    <div class="flex items-center justify-center min-h-screen bg-rose-200">
+        <div class="relative flex flex-col m-6 space-y-10 bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0 md:m-0">
+            
+            <!--left form-->
+            <div class="p-6 md:p-20">
+                <h2 class="mb-5 text-4xl font-bold">Log in</h2>
+                <p class="max-w-sm mb-6 font-light text-gray-900">Please fill in all the information below to complete your profile</p>
+                <div class="relative flex items-center justify-center flex-row m-4 bg-white">
+                    <input type="text" id="myName" class="w-full m-2 p-4 mx-0 border border-4 border-gray-300 rounded-md placeholder:font-light" placeholder="Enter your name">
+                </div>
+                    <div class="relative flex items-center justify-center flex-row m-4 bg-white">
+                    <h4 class="pl-2">+84</h4>
+                    <input type="text" id="myTel" class=" w-full m-2 p-4 mr-0 border border-4 border-gray-300 rounded-md placeholder:font-light" placeholder="Enter your phone number">
+                </div>
+                <div class="relative flex items-center justify-center flex-row m-4 bg-white">
+                    <input type="text" id="age" class="w-full m-2 p-4 mx-0 border border-4 border-gray-300 rounded-md placeholder:font-light" placeholder="Enter your year of birth">
+                </div>
+                <!--Submit button-->
+                <div class="relative flex items-center justify-center">
+                <button onclick="myFunction()" class="w-full p-4 font-bold text-white rounded-md showdow-lg bg-cyan-700 shadow-cyan-100 md:m-10 hover:bg-opacity-90 shadow-sm hover:shadow-lg border-transition hover:-translate-y-0.5 duration-150">
+                    <span>Submit</span>
+                </button>
+                </div>
+                
+                <script>
+                    function myFunction(){
+                        // Name
+                        var varName=document.getElementById("myName").value;
+                        varNameTrim=varName.trim();
+                        const nameSplit= varNameTrim.split(" ");
+                        middleName="";
+                        for (let i=1;i<nameSplit.length-1;i++){
+                            middleName += nameSplit[i]+" ";
+                        }
+                        if (varNameTrim!== "" && nameSplit.length>2){
+                            console.log("Your last name is: "+nameSplit[nameSplit.length-1]);
+                            console.log("Your first name is: "+ nameSplit[0]);
+                            console.log("Your middle name is: "+ middleName.trim());
+                        }
+                        else if(varNameTrim!== "" && nameSplit.length==2){
+                            console.log("Your last name is: "+nameSplit[nameSplit.length-1]);
+                            console.log("Your first name is: "+ nameSplit[0]);
+                        }
+                        else if(varNameTrim!==""&& nameSplit.length==1){
+                            console.log("Your name is: "+nameSplit[nameSplit.length-1]);
+                        }
+                        // Num
+                        const varTel=document.getElementById("myTel").value;
+                        const viettel =["96","97","98","86","16","3"]; //16-11num
+                        const mobi=["120","121","122","126","128","90","93","89","7"]; // 12x-11num
+                        const vina=["123","124","125","127","129","88","91","94"];//12x-11num
+                        
+                        const varTelSplit = varTel.split("");
+                        const varTelSplitSlice =varTelSplit.slice(1);
+                        const varTel2=[varTelSplit[0],varTelSplit[1]].join('');
+                        const varTel2JoinSlice =[varTelSplitSlice[0],varTelSplitSlice[1]].join('');
+                        const varTel3=[varTelSplit[0],varTelSplit[1],varTelSplit[2]].join('');
+                        const varTel3JoinSlice =[varTelSplitSlice[0],varTelSplitSlice[1],varTelSplitSlice[2]];
+                        //Special case
+                        if (varTelSplit[0]!=="0"){
+                            if (varTelSplit[0] == "3" && varTelSplit.length== 9){
+                                console.log("Your phone number is: "+"+84"+varTel);
+                                console.log("Your number is belong to Viettel mobile network (10 Number)");
+                            }
+                            if (varTelSplit[0] == "7" && varTelSplit.length== 9){
+                                console.log("Your phone number is: "+"+84"+varTel);
+                                console.log("Your number is belong to Mobiphone mobile network (10 Number)");
+                            }
+                            //Viettel
+                            if (viettel.includes(varTel2) ){
+                                if (varTel2=="16" && varTelSplit.length==10){
+                                    console.log("Your phone number is: "+"+84"+varTel);
+                                    console.log("Your number is belong to Viettel mobile network (11 Number)");
+                                }
+                                else if (varTel2 !=="16"&& varTelSplit.length==9){
+                                    console.log("Your phone number is: "+"+84"+varTel);
+                                    console.log("Your number is belong to Viettel mobile network (10 Number)");
+                                }
+                                else{
+                                    console.log("Invalid Number");
+                                }
+                            }
+
+                            //Mobi
+                            if (mobi.includes(varTel2) || mobi.includes(varTel3)){
+                                if (varTel2=="12" && varTelSplit.length==10){
+                                    console.log("Your phone number is: " + "+84"+ varTel);
+                                    console.log("Your number is belong to Mobiphone mobile network (11 Number)");
+                                }
+                                else if(varTel2!=="12" && varTelSplit.length==9 ){
+                                    console.log("Your phone number is: " + "+84"+ varTel);
+                                    console.log("Your number is belong to Mobiphone mobile network (10 Number)");
+                                }
+                                else{
+                                    console.log("Invalid Number");
+                                }
+                            }
+                            //Vina
+                            if (vina.includes(varTel2) || vina.includes(varTel3)){
+                                if (varTel2Join=="12" && varTelSplit.length==10){
+                                    console.log("Your phone number is: " + "+84"+ varTel);
+                                    console.log("Your number is belong to Vinaphone mobile network (11 Number)");
+                                }
+                                else if(varTel2!=="12" && varTelSplit.length==9 ){
+                                    console.log("Your phone number is: " + "+84"+ varTel);
+                                    console.log("Your number is belong to Vinaphone mobile network (10 Number)");
+                                }
+                                else{
+                                    console.log("Invalid Number");
+                                }
+                            }
+                        }
+                        else if(varTelSplit[0] =="0"){
+                            if (varTelSplitSlice[0] == "3" && varTelSplitSlice.length== 9){
+                                console.log("Your phone number is: "+varTel);
+                                console.log("Your number is belong to Viettel mobile network (10 Number)");
+
+                            }
+                            if (varTelSplitSlice[0] == "7" && varTelSplitSlice.length== 9){
+                                console.log("Your phone number is: "+varTel);
+                                console.log("Your number is belong to Mobiphone mobile network (10 Number)");
+                            }
+                            //Viettel
+                            if (viettel.includes(varTel2JoinSlice) ){
+                                if (varTel2JoinSlice=="16" && varTelSplitSlice.length==10){
+                                    console.log("Your phone number is: "+varTel);
+                                    console.log("Your number is belong to Viettel mobile network (11 Number)");
+                                }
+                                else if (varTel2JoinSlice !=="16"&& varTelSplitSlice.length==9){
+                                    console.log("Your phone number is: "+varTel);
+                                    console.log("Your number is belong to Viettel mobile network (10 Number)");
+                                }
+                                else{
+                                    console.log("Invalid Number");
+                                }
+                            }
+
+                            //Mobi
+                            if (mobi.includes(varTel2JoinSlice) || mobi.includes(varTel3JoinSlice)){
+                                if (varTel2JoinSlice=="12" && varTelSplitSlice.length==10){
+                                    console.log("Your phone number is: "+ varTel);
+                                    console.log("Your number is belong to Mobiphone mobile network (11 Number)");
+                                }
+                                else if(varTel2JoinSlice!=="12" && varTelSplitSlice.length==9 ){
+                                    console.log("Your phone number is: "+ varTel);
+                                    console.log("Your number is belong to Mobiphone mobile network (10 Number)");
+                                }
+                                else{
+                                    console.log("Invalid Number");
+                                }
+                            }
+                            //Vina
+                            if (vina.includes(varTel2JoinSlice) || vina.includes(varTel3JoinSlice)){
+                                if (varTel2JoinSlice=="12" && varTelSplitSlice.length==10){
+                                    console.log("Your phone number is: "+ varTel);
+                                    console.log("Your number is belong to Vinaphone mobile network (11 Number)");
+                                }
+                                else if(varTel2JoinSlice!=="12" && varTelSplitSlice.length==9 ){
+                                    console.log("Your phone number is: "+ varTel);
+                                    console.log("Your number is belong to Vinaphone mobile network (10 Number)");
+                                }
+                                else{
+                                    console.log("Invalid Number");
+                                }
+                            }
+
+                        }
+                        //Age
+                        var varYear=document.getElementById("age").value;
+                        let varAge=(2023-varYear).toString();
+
+                        if(varYear !==""){
+                            console.log("Your Age is: " + varAge);
+                        }
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
